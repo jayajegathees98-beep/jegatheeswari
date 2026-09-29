@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/login">Sign In</a></nav>
+  </div>
+
+  <div class="auth-wrapper">
+    <h2>Create Your Account</h2>
+    <form method="post" action="/register">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" required>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="field">
+        <label>Full Name (optional)</label>
+        <input type="text" name="full_name">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Create Account</button>
+    </form>
+    <div class="auth-footer">Already have an account? <a href="/login">Sign In</a></div>
+  </div>
+</body>
+</html>

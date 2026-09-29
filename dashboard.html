@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav>
+      <a href="/history">History</a>
+      <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+    </nav>
+  </div>
+  <form id="logoutForm" method="post" action="/logout" style="display:none;"></form>
+
+  <div class="hero" style="padding:40px 32px;">
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>Choose a budget planner to get started with your personalized financial planning experience.</p>
+  </div>
+
+  <div class="container">
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>Home Budget Planner</h3>
+        <p>Plan your interior design budget with AI-powered recommendations.</p>
+        <a href="/home-planner" class="btn btn-primary">Get Started</a>
+      </div>
+      <div class="card">
+        <div class="icon">🎉</div>
+        <h3>Party Budget Planner</h3>
+        <p>Plan your perfect event with smart budget allocation.</p>
+        <a href="/party-planner" class="btn btn-primary">Get Started</a>
+      </div>
+      <div class="card">
+        <div class="icon">💎</div>
+        <h3>Jewelry Budget Planner</h3>
+        <p>Find jewelry pieces that match your outfit and budget.</p>
+        <a href="/jewelry-planner" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+
+    {% if recent %}
+    <div class="form-section" style="margin-top:30px;">
+      <h3>Recent Activity</h3>
+      {% for item in recent %}
+      <div class="history-card">
+        <div class="meta">{{ item.recommendation_type|capitalize }} Plan &middot; {{ item.timestamp[:16] }}</div>
+        <strong>Budget: ₹{{ item.result_summary.total_budget }}</strong>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI. All rights reserved.</footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Interior Planner - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/dashboard">Dashboard</a><a href="/history">History</a></nav>
+  </div>
+
+  <div class="hero" style="padding:36px;">
+    <h1>Home Interior Budget Planner</h1>
+    <p>Create a customized budget plan for your dream home interior.</p>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+    <form method="post" action="/generate-home">
+      <div class="form-section">
+        <h3>💰 Budget Details</h3>
+        <div class="field">
+          <label>Total Budget (₹)</label>
+          <input type="number" name="total_budget" min="0" step="0.01" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>💡 Fixtures &amp; Furniture</h3>
+        <div class="field"><label>Number of Lights/Fixtures</label><input type="number" name="num_lights" min="0" value="0"></div>
+        <div class="field"><label>Number of Ceiling Fans</label><input type="number" name="num_fans" min="0" value="0"></div>
+        <div class="field"><label>Number of Furniture Pieces</label><input type="number" name="num_furniture" min="0" value="0"></div>
+        <div class="field"><label>Number of Dining Tables</label><input type="number" name="num_dining_tables" min="0" value="0"></div>
+      </div>
+
+      <div class="form-section">
+        <h3>🛋️ Rooms to Include</h3>
+        <div class="checkbox-row">
+          <label><input type="checkbox" name="has_living_room" value="true"> Living Room</label>
+          <label><input type="checkbox" name="has_kitchen" value="true"> Kitchen</label>
+          <label><input type="checkbox" name="has_bedroom" value="true"> Bedroom</label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>📝 Additional Information</h3>
+        <div class="field">
+          <label>Special Requirements or Preferences</label>
+          <textarea name="additional_requirements" rows="3" placeholder="Any specific requirements or preferences..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;">Generate Recommendations</button>
+    </form>
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI. All rights reserved.</footer>
+</body>
+</html>

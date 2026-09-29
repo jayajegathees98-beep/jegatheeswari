@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/register">Create Account</a></nav>
+  </div>
+
+  <div class="auth-wrapper">
+    <h2>Welcome Back</h2>
+    <div id="error" class="error" style="display:none;"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" required>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Sign In</button>
+    </form>
+    <div class="auth-footer">Don't have an account? <a href="/register">Create one</a></div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = new URLSearchParams(new FormData(e.target));
+      const res = await fetch('/token', { method: 'POST', body: form });
+      if (res.ok) {
+        window.location.href = '/dashboard';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        const err = document.getElementById('error');
+        err.textContent = data.detail || 'Login failed. Check your credentials.';
+        err.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

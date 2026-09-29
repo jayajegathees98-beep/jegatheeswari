@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jewelry Planner - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/dashboard">Dashboard</a><a href="/history">History</a></nav>
+  </div>
+
+  <div class="hero" style="padding:36px;">
+    <h1>Jewelry Budget Planner</h1>
+    <p>Get AI-powered jewelry recommendations within your budget for any occasion.</p>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+    <form method="post" action="/generate-jewelry" enctype="multipart/form-data">
+      <div class="form-section">
+        <h3>💰 Budget Details</h3>
+        <div class="field"><label>Total Budget (₹)</label><input type="number" name="total_budget" min="0" step="0.01" required></div>
+      </div>
+
+      <div class="form-section">
+        <h3>🎀 Occasion &amp; Preferences</h3>
+        <div class="field"><label>Occasion</label><input type="text" name="occasion" placeholder="e.g. Wedding, Birthday, Festival" required></div>
+        <div class="field"><label>Style Preferences</label><textarea name="preferences" rows="3" placeholder="Describe your style preferences, materials, colors, etc."></textarea></div>
+      </div>
+
+      <div class="form-section">
+        <h3>📷 Upload Outfit Image (optional)</h3>
+        <div class="field">
+          <input type="file" name="image" accept="image/*">
+        </div>
+        <p style="color:#6b7280; font-size:0.85rem;">If you upload a photo of your outfit, the AI will match jewelry to its color and style.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;">Get Recommendations</button>
+    </form>
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI | Smart Budget Solutions</footer>
+</body>
+</html>

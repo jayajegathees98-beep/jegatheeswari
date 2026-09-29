@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Recommendations - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/dashboard">Dashboard</a><a href="/history">History</a></nav>
+  </div>
+
+  <div class="container" style="max-width:760px;">
+    <h1>Your Personalized {{ plan_type }} Plan</h1>
+
+    <div class="budget-summary">
+      <div><span>Total Budget</span><strong>₹{{ "%.2f"|format(result.total_budget or 0) }}</strong></div>
+      <div><span>Remaining Budget</span><strong>₹{{ "%.2f"|format(result.remaining_budget or 0) }}</strong></div>
+    </div>
+
+    {% if result.outfit_analysis %}
+    <div class="form-section">
+      <h3>👗 Outfit Analysis</h3>
+      <p><strong>Colors:</strong> {{ result.outfit_analysis.colors|join(', ') }} &nbsp;
+         <strong>Style:</strong> {{ result.outfit_analysis.style }} &nbsp;
+         <strong>Formality:</strong> {{ result.outfit_analysis.formality }}</p>
+    </div>
+    {% endif %}
+
+    {% for category in result.budget_breakdown %}
+    <div class="category-block">
+      <h4>{{ category.category }} <small style="color:#6b7280;">(Allocation: ₹{{ "%.2f"|format(category.allocation or 0) }})</small></h4>
+      <table class="items-table">
+        <thead>
+          <tr><th>Item</th><th>Description</th><th>Price</th><th>Qty</th><th>Shop</th></tr>
+        </thead>
+        <tbody>
+          {% for item in category.items %}
+          <tr>
+            <td><strong>{{ item.name }}</strong></td>
+            <td>{{ item.description }}</td>
+            <td>₹{{ item.estimated_price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td class="shopping-links">
+              {% for platform, url in (item.shopping_links or {}).items() %}
+                <a href="{{ url }}" target="_blank" rel="noopener">{{ platform|capitalize }}</a>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+
+    {% if result.venue_suggestions %}
+    <div class="category-block">
+      <h4>📍 Venue Suggestions</h4>
+      <table class="items-table">
+        <thead><tr><th>Name</th><th>Type</th><th>Capacity</th><th>Est. Cost</th><th>Search</th></tr></thead>
+        <tbody>
+          {% for venue in result.venue_suggestions %}
+          <tr>
+            <td>{{ venue.name }}</td>
+            <td>{{ venue.type }}</td>
+            <td>{{ venue.capacity }}</td>
+            <td>₹{{ venue.estimated_cost }}</td>
+            <td class="shopping-links">
+              {% for platform, url in (venue.shopping_links or {}).items() %}
+                <a href="{{ url }}" target="_blank" rel="noopener">{{ platform|capitalize }}</a>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if result.jewelry_recommendations %}
+    <div class="category-block">
+      <h4>💎 Jewelry Recommendations</h4>
+      {% for item in result.jewelry_recommendations %}
+      <div class="form-section">
+        <strong>{{ item.item_type|capitalize }}</strong> — ₹{{ item.estimated_price }}
+        <p>{{ item.description }}</p>
+        <p><em>Style: {{ item.style }}</em></p>
+        <div class="shopping-links">
+          {% for platform, url in (item.shopping_links or {}).items() %}
+            <a href="{{ url }}" target="_blank" rel="noopener">{{ platform|capitalize }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if result.styling_tips %}
+    <div class="suggestions-box">
+      <strong>Styling Tips</strong>
+      <ul>{% for tip in result.styling_tips %}<li>{{ tip }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    {% if result.additional_suggestions %}
+    <div class="suggestions-box">
+      <strong>Additional Suggestions</strong>
+      <ul>{% for tip in result.additional_suggestions %}<li>{{ tip }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    <div style="margin-top:24px;">
+      <a href="/dashboard" class="btn btn-outline" style="background:var(--navy); color:#fff;">Back to Dashboard</a>
+      <a href="/history" class="btn btn-primary">View History</a>
+    </div>
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI. All rights reserved.</footer>
+</body>
+</html>

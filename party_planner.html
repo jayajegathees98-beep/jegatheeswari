@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Party Planner - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/dashboard">Dashboard</a><a href="/history">History</a></nav>
+  </div>
+
+  <div class="hero" style="padding:36px;">
+    <h1>Party Budget Planner</h1>
+    <p>Plan your perfect event with AI-powered budget recommendations.</p>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+    <form method="post" action="/generate-party">
+      <div class="form-section">
+        <h3>💰 Basic Information</h3>
+        <div class="field"><label>Total Budget (₹)</label><input type="number" name="total_budget" min="0" step="0.01" required></div>
+        <div class="field"><label>Number of Guests</label><input type="number" name="num_guests" min="1" required></div>
+      </div>
+
+      <div class="form-section">
+        <h3>🎈 Event Details</h3>
+        <div class="field">
+          <label>Party Type</label>
+          <select name="party_type" required>
+            <option value="Birthday">Birthday</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Corporate">Corporate</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Baby Shower">Baby Shower</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Venue Type</label>
+          <input type="text" name="venue_type" placeholder="e.g. Home, Banquet Hall, Outdoor">
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>🎊 Party Needs</h3>
+        <div class="checkbox-row">
+          <label><input type="checkbox" name="needs_catering" value="true" checked> Catering</label>
+          <label><input type="checkbox" name="needs_decoration" value="true" checked> Decoration</label>
+          <label><input type="checkbox" name="needs_entertainment" value="true" checked> Entertainment</label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>📝 Additional Requirements</h3>
+        <textarea name="additional_requirements" rows="3" placeholder="Special requests, themes, dietary restrictions, etc."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;">Generate Budget Plan</button>
+    </form>
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI. All rights reserved.</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>History - PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand"><a href="/">PocketSmart</a></div>
+    <nav><a href="/dashboard">Dashboard</a></nav>
+  </div>
+
+  <div class="hero" style="padding:36px;">
+    <h1>Your Recommendation History</h1>
+    <p>View and manage all your previous budget plans and recommendations.</p>
+  </div>
+
+  <div class="container">
+    <h3>Recent Recommendations</h3>
+    {% if not history %}
+      <p>No recommendations yet. Try one of the planners from your dashboard!</p>
+    {% endif %}
+    <div class="grid-3">
+      {% for item in history %}
+      <div class="history-card">
+        <div class="meta">{{ item.recommendation_type|capitalize }} Budget &middot; {{ item.timestamp[:16] }}</div>
+        <p><strong>Total:</strong> ₹{{ item.result_summary.total_budget }} &nbsp;
+           <strong>Remaining:</strong> ₹{{ item.result_summary.remaining_budget }}</p>
+        <a href="/recommendation-details/{{ item.id }}" class="btn btn-primary" target="_blank">View Full Details (JSON)</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>&copy; 2026 PocketSmart AI. All rights reserved.</footer>
+</body>
+</html>
